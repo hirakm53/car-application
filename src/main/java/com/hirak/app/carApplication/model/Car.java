@@ -50,7 +50,7 @@ public class Car implements Serializable {
 	private String carModel;
 	
 	@Column(name = "car_manufacturing_yr")
-	private int carManufacturingYear;
+	private String carManufacturingYear;
 	
 	@Column(name = "car_color")
 	private String carColor;

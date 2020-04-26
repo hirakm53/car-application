@@ -49,7 +49,7 @@ public class CarDto implements Serializable {
 	
 	@NotNull
 	@JsonProperty("car_manufacturing_year")
-	private int carManufacturingYear;
+	private String carManufacturingYear;
 	
 	@NotEmpty
 	@NotNull

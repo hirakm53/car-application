@@ -84,4 +84,25 @@ public class CarServiceImpl implements CarService {
 			return "Failed to delete the entry";
 	}
 
+	@Override
+	public List<CarDto> searchCars(String carName, String carManufacturerName, String carModel, String carManufacturingYear,
+			String carColor) {
+		List<Car> carsList = carRepo.findCarsByFields(carName, carManufacturerName, carModel, carManufacturingYear, carColor);
+		List<CarDto> carDtoList = null;
+		if(!carsList.isEmpty() && (null != carsList)) {
+			logger.info("List of cars are " + carsList.toString());
+			carDtoList = carsList.stream().map(cars -> {
+				CarDto carDto = new CarDto();
+				carDto.setCarId(cars.getCarId());
+				carDto.setCarName(cars.getCarName());
+				carDto.setCarManufacturerName(cars.getCarManufacturerName());
+				carDto.setCarModel(cars.getCarModel());
+				carDto.setCarManufacturingYear(cars.getCarManufacturingYear());
+				carDto.setCarColor(cars.getCarColor());
+				return carDto;
+			}).collect((Collectors.toList()));			
+		}
+		return carDtoList;
+	}
+
 }

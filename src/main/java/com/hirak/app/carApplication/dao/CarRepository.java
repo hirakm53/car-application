@@ -27,7 +27,7 @@ public interface CarRepository extends JpaRepository<Car, Integer>{
 	@Modifying
 	@Transactional
 	@Query(value = "insert into Car(car_name, car_manufacturer_name, car_model, car_manufacturing_yr, car_color) VALUES(:name, :manufacturerName, :model, :year, :color)", nativeQuery = true)
-	public Integer save(@Param("name") String name, @Param("manufacturerName") String manufacturerName, @Param("model") String model, @Param("year") int year, @Param("color") String color);
+	public Integer save(@Param("name") String name, @Param("manufacturerName") String manufacturerName, @Param("model") String model, @Param("year") String year, @Param("color") String color);
 	
 	@Transactional
 	public Car findById(int id);
@@ -35,11 +35,15 @@ public interface CarRepository extends JpaRepository<Car, Integer>{
 	@Transactional
 	@Modifying
 	@Query("update Car set carName =:name, carManufacturerName =:manufacturerName, carModel =:model, carManufacturingYear =:year, carColor =:color where carId =:id")
-	public Integer update(@Param("id") int id, @Param("name") String name, @Param("manufacturerName") String manufacturerName, @Param("model") String model, @Param("year") int year, @Param("color") String color);
+	public Integer update(@Param("id") int id, @Param("name") String name, @Param("manufacturerName") String manufacturerName, @Param("model") String model, @Param("year") String year, @Param("color") String color);
 	
 	@Transactional
 	@Modifying
 	@Query("delete from Car where carId =:id")
 	public Integer delete(@Param("id") int id);
+	
+	@Transactional
+	@Query("select c from Car c where (:name is null or c.carName =:name) and (:manufacturerName is null or c.carManufacturerName =:manufacturerName) and (:model is null or c.carModel =:model) and (:year is null or c.carManufacturingYear =:year) and (:color is null or c.carColor =:color)")
+	public List<Car> findCarsByFields(@Param("name") String name, @Param("manufacturerName") String manufacturerName, @Param("model") String model, @Param("year") String year, @Param("color") String color);
 
 }

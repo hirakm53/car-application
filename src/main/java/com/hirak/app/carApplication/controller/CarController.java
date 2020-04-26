@@ -68,5 +68,14 @@ public class CarController {
 		String msg = carService.removeCars(carId);
 		return new ResponseEntity<String>(msg, HttpStatus.OK);
 	}
+	
+	@GetMapping(path = "/car/search")
+	public ResponseEntity<?> searchCars(@RequestParam(value = "carName", required=false) String carName, @RequestParam(value = "carManufacturerName", required=false) String carManufacturerName, @RequestParam(value = "carModel", required=false) String carModel, @RequestParam(value = "carManufacturingYear", required=false) String carManufacturingYear, @RequestParam(value = "carColor", required=false) String carColor) {
+		logger.info("Search for cars API is called");
+		List<CarDto> carDtoList = carService.searchCars(carName, carManufacturerName, carModel, carManufacturingYear, carColor);
+		if((null != carDtoList) && (!carDtoList.isEmpty()))
+			return new ResponseEntity<List<CarDto>>(carDtoList, HttpStatus.OK);
+		return new ResponseEntity<String>("No data found!", HttpStatus.NO_CONTENT);
+	}
 
 }

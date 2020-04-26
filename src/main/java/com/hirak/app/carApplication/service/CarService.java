@@ -17,5 +17,7 @@ public interface CarService {
 	public String updateCars(CarDto carDto);
 	
 	public String removeCars(int id);
+	
+	public List<CarDto> searchCars(String carName, String carManufacturerName, String carModel, String carManufacturingYear, String carColor);
 
 }
