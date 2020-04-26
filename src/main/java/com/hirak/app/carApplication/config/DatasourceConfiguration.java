@@ -52,7 +52,7 @@ public class DatasourceConfiguration {
 	/**
 	 * Entity packages
 	 */
-	private String entityPackage = "com.hirak.app.carApplication.entity";
+	private String entityPackage = "com.hirak.app.carApplication.model";
 
 	/**
 	 * Logger.

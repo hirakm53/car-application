@@ -1,5 +1,7 @@
 package com.hirak.app.carApplication.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,8 +27,13 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class Car {
+public class Car implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5593084796624697901L;
+
 	@Id
 	@Column(name = "car_id")
 	@SequenceGenerator(name = "CAR_ID_SQ", sequenceName = "CAR_ID_SQ", allocationSize = 1)
