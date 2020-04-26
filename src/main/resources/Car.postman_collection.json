@@ -1,0 +1,241 @@
+{
+	"info": {
+		"_postman_id": "77c37fe6-9072-45df-8bb4-855efbad17be",
+		"name": "Car",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Fetch All Cars",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/car/list",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"car",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a new entry",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"car_name\": \"Creta\",\n        \"car_manufacturer_name\": \"Hyundai\",\n        \"car_model\": \"SX\",\n        \"car_manufacturing_year\": 2020,\n        \"car_color\": \"Red\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/car",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"car"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update an entry",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"car_id\": 9,\n        \"car_name\": \"Creta\",\n        \"car_manufacturer_name\": \"Hyundai\",\n        \"car_model\": \"SX\",\n        \"car_manufacturing_year\": 2021,\n        \"car_color\": \"White\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/car",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"car"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete an entry",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/car?carId=9",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"car"
+					],
+					"query": [
+						{
+							"key": "carId",
+							"value": "9"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search for an entry",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/car/search?carColor=Orange",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"car",
+						"search"
+					],
+					"query": [
+						{
+							"key": "carName",
+							"value": "null",
+							"disabled": true
+						},
+						{
+							"key": "carManufacturerName",
+							"value": "null",
+							"disabled": true
+						},
+						{
+							"key": "carModel",
+							"value": "null",
+							"disabled": true
+						},
+						{
+							"key": "carManufacturingYear",
+							"value": "null",
+							"disabled": true
+						},
+						{
+							"key": "carColor",
+							"value": "Orange"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
