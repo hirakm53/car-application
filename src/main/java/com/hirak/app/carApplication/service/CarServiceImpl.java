@@ -44,4 +44,14 @@ public class CarServiceImpl implements CarService {
 		return carDtoList;
 	}
 
+	@Override
+	public String addCars(CarDto carDto) {
+		Integer res = carRepo.save(carDto.getCarName(), carDto.getCarManufacturerName(), carDto.getCarModel(), carDto.getCarManufacturingYear(), carDto.getCarColor());
+		logger.info("Result is " + res);
+		if(res == 1)
+			return "Successfully created a new entry";
+		else
+			return "Failed to create a new entry";
+	}
+
 }

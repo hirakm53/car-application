@@ -2,6 +2,8 @@ package com.hirak.app.carApplication.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -36,6 +40,15 @@ public class CarController {
 		if((null != carDtoList) && (!carDtoList.isEmpty()))
 			return new ResponseEntity<List<CarDto>>(carDtoList, HttpStatus.OK);
 		return new ResponseEntity<String>("No data found!", HttpStatus.NO_CONTENT);
+	}
+	
+	@PostMapping(path = "/add", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> addCars(@RequestBody @Valid CarDto carDto) {
+		logger.info("Adding new entry of cars API is called");
+		String msg = null;
+		if(null != carDto)
+			msg = carService.addCars(carDto);
+		return new ResponseEntity<String>(msg, HttpStatus.CREATED);
 	}
 
 }

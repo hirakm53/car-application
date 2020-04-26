@@ -11,5 +11,7 @@ import com.hirak.app.carApplication.dto.CarDto;
 public interface CarService {
 	
 	public List<CarDto> getAllCars();
+	
+	public String addCars(CarDto carDto);
 
 }
