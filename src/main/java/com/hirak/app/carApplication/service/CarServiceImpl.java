@@ -26,7 +26,12 @@ public class CarServiceImpl implements CarService {
 
 	@Override
 	public List<CarDto> getAllCars() {
-		List<Car> carsList = carRepo.findAll();
+		List<Car> carsList = null;
+		try {
+			carsList = carRepo.findAll();
+		} catch(Exception e) {
+			logger.error("Exception occurred is ", e);
+		}
 		List<CarDto> carDtoList = null;
 		if(!carsList.isEmpty() && (null != carsList)) {
 			logger.info("List of cars are " + carsList.toString());
@@ -46,7 +51,12 @@ public class CarServiceImpl implements CarService {
 
 	@Override
 	public String addCars(CarDto carDto) {
-		Integer res = carRepo.save(carDto.getCarName(), carDto.getCarManufacturerName(), carDto.getCarModel(), carDto.getCarManufacturingYear(), carDto.getCarColor());
+		Integer res = 0;
+		try {
+			res = carRepo.save(carDto.getCarName(), carDto.getCarManufacturerName(), carDto.getCarModel(), carDto.getCarManufacturingYear(), carDto.getCarColor());
+		} catch (Exception e) {
+			logger.error("Exception occurred is ", e);
+		}
 		logger.info("Result is " + res);
 		if(res == 1)
 			return "Successfully created a new entry";
@@ -56,12 +66,16 @@ public class CarServiceImpl implements CarService {
 
 	@Override
 	public String updateCars(CarDto carDto) {
-		Car car = carRepo.findById(carDto.getCarId());
 		Integer res = 0;
-		if(null != car) {
-			res = carRepo.update(carDto.getCarId(), carDto.getCarName(), carDto.getCarManufacturerName(), carDto.getCarModel(), carDto.getCarManufacturingYear(), carDto.getCarColor());
-		} else {
-			return "No data available for the provided id";
+		try {
+			Car car = carRepo.findById(carDto.getCarId());		
+			if(null != car) {
+				res = carRepo.update(carDto.getCarId(), carDto.getCarName(), carDto.getCarManufacturerName(), carDto.getCarModel(), carDto.getCarManufacturingYear(), carDto.getCarColor());
+			} else {
+				return "No data available for the provided id";
+			}
+		} catch(Exception e) {
+			logger.error("Exception occurred is ", e);
 		}
 		if(res == 1)
 			return "Successfully updated the entry";
@@ -71,12 +85,16 @@ public class CarServiceImpl implements CarService {
 
 	@Override
 	public String removeCars(int id) {
-		Car car = carRepo.findById(id);
 		Integer res = 0;
-		if(null != car) {
-			res = carRepo.delete(id);
-		} else {
-			return "No data available for the provided id";
+		try {
+			Car car = carRepo.findById(id);		
+			if(null != car) {
+				res = carRepo.delete(id);
+			} else {
+				return "No data available for the provided id";
+			}
+		} catch(Exception e) {
+			logger.error("Exception occurred is ", e);
 		}
 		if(res == 1)
 			return "Successfully deleted the entry";
@@ -87,7 +105,12 @@ public class CarServiceImpl implements CarService {
 	@Override
 	public List<CarDto> searchCars(String carName, String carManufacturerName, String carModel, String carManufacturingYear,
 			String carColor) {
-		List<Car> carsList = carRepo.findCarsByFields(carName, carManufacturerName, carModel, carManufacturingYear, carColor);
+		List<Car> carsList = null;
+		try {
+			carsList = carRepo.findCarsByFields(carName, carManufacturerName, carModel, carManufacturingYear, carColor);
+		} catch(Exception e) {
+			logger.error("Exception occurred is ", e);
+		}
 		List<CarDto> carDtoList = null;
 		if(!carsList.isEmpty() && (null != carsList)) {
 			logger.info("List of cars are " + carsList.toString());
