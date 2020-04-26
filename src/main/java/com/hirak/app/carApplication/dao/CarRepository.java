@@ -36,5 +36,10 @@ public interface CarRepository extends JpaRepository<Car, Integer>{
 	@Modifying
 	@Query("update Car set carName =:name, carManufacturerName =:manufacturerName, carModel =:model, carManufacturingYear =:year, carColor =:color where carId =:id")
 	public Integer update(@Param("id") int id, @Param("name") String name, @Param("manufacturerName") String manufacturerName, @Param("model") String model, @Param("year") int year, @Param("color") String color);
+	
+	@Transactional
+	@Modifying
+	@Query("delete from Car where carId =:id")
+	public Integer delete(@Param("id") int id);
 
 }

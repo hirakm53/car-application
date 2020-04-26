@@ -15,5 +15,7 @@ public interface CarService {
 	public String addCars(CarDto carDto);
 	
 	public String updateCars(CarDto carDto);
+	
+	public String removeCars(int id);
 
 }

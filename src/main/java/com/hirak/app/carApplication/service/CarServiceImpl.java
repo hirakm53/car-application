@@ -69,4 +69,19 @@ public class CarServiceImpl implements CarService {
 			return "Failed to update the entry";
 	}
 
+	@Override
+	public String removeCars(int id) {
+		Car car = carRepo.findById(id);
+		Integer res = 0;
+		if(null != car) {
+			res = carRepo.delete(id);
+		} else {
+			return "No data available for the provided id";
+		}
+		if(res == 1)
+			return "Successfully deleted the entry";
+		else
+			return "Failed to delete the entry";
+	}
+
 }
