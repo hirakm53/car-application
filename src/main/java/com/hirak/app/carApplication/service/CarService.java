@@ -13,5 +13,7 @@ public interface CarService {
 	public List<CarDto> getAllCars();
 	
 	public String addCars(CarDto carDto);
+	
+	public String updateCars(CarDto carDto);
 
 }

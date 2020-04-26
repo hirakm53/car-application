@@ -28,5 +28,13 @@ public interface CarRepository extends JpaRepository<Car, Integer>{
 	@Transactional
 	@Query(value = "insert into Car(car_name, car_manufacturer_name, car_model, car_manufacturing_yr, car_color) VALUES(:name, :manufacturerName, :model, :year, :color)", nativeQuery = true)
 	public Integer save(@Param("name") String name, @Param("manufacturerName") String manufacturerName, @Param("model") String model, @Param("year") int year, @Param("color") String color);
+	
+	@Transactional
+	public Car findById(int id);
+	
+	@Transactional
+	@Modifying
+	@Query("update Car set carName =:name, carManufacturerName =:manufacturerName, carModel =:model, carManufacturingYear =:year, carColor =:color where carId =:id")
+	public Integer update(@Param("id") int id, @Param("name") String name, @Param("manufacturerName") String manufacturerName, @Param("model") String model, @Param("year") int year, @Param("color") String color);
 
 }

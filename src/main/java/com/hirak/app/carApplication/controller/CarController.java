@@ -12,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,7 +24,6 @@ import com.hirak.app.carApplication.service.CarServiceImpl;
  * @author hirak_mahanta
  *
  */
-
 @RestController
 @RequestMapping("/car")
 public class CarController {
@@ -49,6 +49,15 @@ public class CarController {
 		if(null != carDto)
 			msg = carService.addCars(carDto);
 		return new ResponseEntity<String>(msg, HttpStatus.CREATED);
+	}
+	
+	@PutMapping(path = "/update", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> updateCars(@RequestBody @Valid CarDto carDto) {
+		logger.info("Updating entry of cars API is called");
+		String msg = null;
+		if(null != carDto)
+			msg = carService.updateCars(carDto);
+		return new ResponseEntity<String>(msg, HttpStatus.OK);
 	}
 
 }

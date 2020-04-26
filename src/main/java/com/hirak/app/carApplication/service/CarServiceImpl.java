@@ -54,4 +54,19 @@ public class CarServiceImpl implements CarService {
 			return "Failed to create a new entry";
 	}
 
+	@Override
+	public String updateCars(CarDto carDto) {
+		Car car = carRepo.findById(carDto.getCarId());
+		Integer res = 0;
+		if(null != car) {
+			res = carRepo.update(carDto.getCarId(), carDto.getCarName(), carDto.getCarManufacturerName(), carDto.getCarModel(), carDto.getCarManufacturingYear(), carDto.getCarColor());
+		} else {
+			return "No data available for the provided id";
+		}
+		if(res == 1)
+			return "Successfully updated the entry";
+		else
+			return "Failed to update the entry";
+	}
+
 }
